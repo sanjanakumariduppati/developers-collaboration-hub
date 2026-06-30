@@ -1,5 +1,6 @@
 const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
+const connectionRoutes = require("./routes/connectionRoutes");
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
@@ -17,6 +18,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/connections", connectionRoutes);
 
 app.get("/", (req, res) => {
   res.send("Developers Collaboration Hub API Running...");

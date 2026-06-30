@@ -55,7 +55,43 @@ const updateProfile = async (req, res) => {
   }
 };
 
+// Get All Developers
+const getAllDevelopers = async (req, res) => {
+  try {
+    const users = await User.find().select("-password");
+
+    res.json(users);
+
+  } catch (err) {
+    res.status(500).json({
+      message: "Server Error",
+    });
+  }
+};
+
+// Get Developer by ID
+const getDeveloperById = async (req, res) => {
+  try {
+    const developer = await User.findById(req.params.id).select("-password");
+
+    if (!developer) {
+      return res.status(404).json({
+        message: "Developer not found",
+      });
+    }
+
+    res.json(developer);
+
+  } catch (err) {
+    res.status(500).json({
+      message: "Server Error",
+    });
+  }
+};
+
 module.exports = {
   getProfile,
   updateProfile,
+  getAllDevelopers,
+  getDeveloperById,
 };
